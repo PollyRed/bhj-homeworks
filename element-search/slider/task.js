@@ -2,14 +2,16 @@ const nextImg = document.querySelector(".slider__arrow_next");
 const prevImg = document.querySelector(".slider__arrow_prev");
 
 const sliderItems = Array.from(document.querySelectorAll(".slider__item"));
-
 const sliderDots = Array.from(document.querySelectorAll(".slider__dot"));
 
 let sliderIndex = 0;
 
-function makeElementsInactive(index) {
-  sliderItems[index].className = "slider__item";
-  sliderDots[index].className = "slider__dot";
+function makeElementsInactive() {
+  const activeImg = document.querySelector(".slider__item_active");
+  activeImg.className = "slider__item";
+
+  const activeDot = document.querySelector(".slider__dot_active");
+  activeDot.className = "slider__dot";
 }
 
 function makeElementsActive(index) {
@@ -18,7 +20,8 @@ function makeElementsActive(index) {
 }
 
 nextImg.onclick = function() {
-  makeElementsInactive(sliderIndex);
+  makeElementsInactive();
+
   ++sliderIndex;
   if (sliderIndex === sliderItems.length) {
     sliderIndex = 0;
@@ -27,7 +30,8 @@ nextImg.onclick = function() {
 }
 
 prevImg.onclick = function() {
-  makeElementsInactive(sliderIndex);
+  makeElementsInactive();
+
   --sliderIndex;
   if (sliderIndex === -1) {
     sliderIndex = sliderItems.length - 1;
@@ -37,11 +41,8 @@ prevImg.onclick = function() {
 
 for (let i = 0; i < sliderDots.length; i++) {
   sliderDots[i].onclick = function() {
-    const activeDot = document.querySelector(".slider__dot_active");
-    activeDot.className = "slider__dot";
-    sliderDots[i].className = "slider__dot slider__dot_active";
-    const activeImg = document.querySelector(".slider__item_active");
-    activeImg.className = "slider__item";
-    sliderItems[i].className = "slider__item slider__item_active";
+    sliderIndex = i;
+    makeElementsInactive();
+    makeElementsActive(sliderIndex);
   }
 }
