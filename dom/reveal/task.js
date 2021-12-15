@@ -2,9 +2,8 @@
 
 const isInViewport = function(element) {
   const viewportHeight = window.innerHeight;
-  const elementTop = element.getBoundingClientRect().top;
-  const elementBottom = element.getBoundingClientRect().bottom; 
-  return (elementTop < viewportHeight) && (elementBottom > 0) ? true : false;
+  const {top, bottom} = element.getBoundingClientRect();
+  return (top < viewportHeight) && (bottom > 0) ? true : false;
 };
 
 const reveals = Array.from(document.querySelectorAll(".reveal"));

@@ -3,6 +3,8 @@
 const rotators = Array.from(document.querySelectorAll(".rotator"));
 
 for (let rotator of rotators) {
+  const cases = Array.from(rotator.querySelectorAll(".rotator__case"));
+
   function adsRotator() {
     const activeRotator = rotator.querySelector(".rotator__case_active");
     activeRotator.classList.remove("rotator__case_active");
@@ -12,12 +14,12 @@ for (let rotator of rotators) {
       nextElement = rotator.firstElementChild;
     }
     nextElement.classList.add("rotator__case_active");
+    timeout = setTimeout(adsRotator, nextElement.dataset.speed);
   }
-
-  const cases = Array.from(rotator.querySelectorAll(".rotator__case"));
+  
   for(let rotatorCase of cases) {
     rotatorCase.style.color = rotatorCase.dataset.color;
   }
 
-  setInterval(adsRotator, 1000);
+  let timeout = setTimeout(adsRotator, cases[0].dataset.speed);
 }
