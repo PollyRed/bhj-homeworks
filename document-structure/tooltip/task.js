@@ -10,10 +10,16 @@ for (let tooltip of tooltips) {
     const top = rect.top + rect.heigth;
     const left = rect.left;
     const activeTooltip = document.querySelector(".tooltip_active");
-    if (activeTooltip) {
-      activeTooltip.remove();
-    } 
     
+    if (activeTooltip) {
+      if (activeTooltip === this.nextElementSibling) {
+        activeTooltip.remove();
+        return;
+      } else {
+        activeTooltip.remove();
+      }
+    } 
+
     this.insertAdjacentHTML("afterEnd", `<div class="tooltip tooltip_active" style="left: ${left}px; top: ${top}px"> ${title} </div>`);
   })
 }

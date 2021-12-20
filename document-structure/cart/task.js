@@ -25,12 +25,12 @@ for (let product of products) {
   productAdd.addEventListener("click", function() {
     const cartProducts = Array.from(cart.querySelectorAll(".cart__product"));
 
-    for (let cartProduct of cartProducts) {
-      if (cartProduct.dataset.id === id) {
-        const cartProductCount = cartProduct.querySelector(".cart__product-count");
-        cartProductCount.textContent = +cartProductCount.textContent + +quantityValue.textContent;
-        return;
-      }
+    const cartProduct = cartProducts.find(product => product.dataset.id === id);
+
+    if (cartProduct) {
+      const cartProductCount = cartProduct.querySelector(".cart__product-count");
+      cartProductCount.textContent = +cartProductCount.textContent + +quantityValue.textContent;
+      return;
     }
 
     cart.insertAdjacentHTML("beforeend", `<div class="cart__product" data-id="${id}"> <img class="cart__product-image" src="${src}"> <div class="cart__product-count">${quantityValue.textContent}</div> </div>`);
